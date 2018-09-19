@@ -1,0 +1,8 @@
+- name: This is wordpress role
+  hosts: all
+  roles:
+    - { role: wordpressubuntu_debian_fedora, when: "ansible_distribution == 'Ubuntu' " }
+
+    - { role: wordpressubuntu_debian_fedora, when: "ansible_distribution == 'Debian' " }
+
+    - { role: wordpressubuntu_debian_fedora, when: "ansible_distribution == 'Fedora' " }

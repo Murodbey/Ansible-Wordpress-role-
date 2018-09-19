@@ -1,0 +1,19 @@
+---
+# tasks file for /etc/ansible/roles/wordpressfedora_ubuntu_debian
+- package:
+    name: "{{ item }}"
+  with_items:
+    - php
+    - apache2
+    - php-mysql
+    - telnet
+  ignore_errors: yes
+
+- get_url: url=https://wordpress.org/latest.tar.gz  dest=/var/www/html/
+- unarchive: src=/var/www/html/latest.tar.gz  dest=/var/www/html/ remote_src=yes
+  ignore_errors: yes
+- shell: "mv /var/www/html/wordpress/*  /var/www/html/"
+  ignore_errors: yes
+- name: Start webserver
+  service: name=apache2 state=restarted
+
